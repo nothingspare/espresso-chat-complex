@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-6">
+		<h2>Conversations</h2>
+		<table class="table table-bordered table-striped">
+			<thead><td>Created</td><td>Title</td><td>Creator</td></thead>
+			<tbody>
+				<tr class="cursor-pointer" ng-click="conversations.activate(conversation);" ng-repeat="conversation in conversationsList">
+					<td>{{conversation.time | date:'MM/dd/yy hh:mm a'}}</td>
+					<td>{{conversation.title}}</td>
+					<td>{{conversation.creator}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<form ng-submit="conversations.add();">
+				<input class="form-control" placeholder="Title" type="text" ng-model="conversation.title"/>
+				<input class="btn btn-primary btn-block" type="submit" value="Open Conversation"/>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<h2>Dialog<span ng-if="activeConversation">: {{activeConversation.title}}</span></h2>
+		<div class="" ng-if="activeConversation">
+			<p ng-repeat="dialog in dialogList">
+				<span class="small">{{dialog.time | date:'MM/dd/yy hh:mm a'}}</span> | <span class="text-primary">{{dialog.creator}}</span>: <span>{{dialog.message}}</span>
+			</p>
+			<form ng-submit="chat.add();">
+				<input class="form-control" placeholder="Message" type="text" ng-model="message.message"/>
+				<input class="btn btn-primary btn-block" type="submit" value="Post Message"/>
+			</form>
+		</div>
+	</div>
+</div>

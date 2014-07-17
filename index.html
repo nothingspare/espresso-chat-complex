@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>PVC</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
+        <link rel="stylesheet" href="styles/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="styles/font-awesome.min.css" />
+        <link rel="stylesheet" href="styles/app.css" />
+		
+        <script src="scripts/moment.min.js"></script>
+        <script src="scripts/jquery-2.1.1.min.js"></script>
+        <script src="scripts/bootstrap.min.js"></script>
+        <script src="scripts/angular.min.js"></script>
+        <script src="scripts/angular-route.min.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/routes.js"></script>
+		
+        <script src="services/Storage.js"></script>
+        <script src="services/API.js"></script>
+        <script src="services/Auth.js"></script>
+		
+        <script src="controllers/IndexController.js"></script>
+        <script src="controllers/LoginController.js"></script>
+        <script src="controllers/LogoutController.js"></script>
+	</head>
+	<body>
+		<div class="container" ng-app="Application">
+		
+			<div class="row app-header">
+				<div class="col-md-12">
+					<h2>Espresso Chat</h2>
+				</div>
+			</div>
+			
+			<div class="app-content" ng-view>
+			</div>
+		</div>
+	</body>
+</html>
