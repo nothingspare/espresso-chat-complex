@@ -4,9 +4,9 @@ Application.service('API', [
 		//endpoints wrapper
 		var API = {
 			authenticate: function endpointAuthentication(credentials) {
-				return $http.post(
-					Config.base.api + '/@authentication',
-					credentials
+				return $http.get(
+					Config.base.api + '/auth?arg_username=' + credentials.username + '&arg_password=' + credentials.password,
+					{headers: API.authHeaders()}
 				);
 			},
 			valid: function endpointApp() {
@@ -41,9 +41,32 @@ Application.service('API', [
 					{headers: API.authHeaders()}
 				);
 			},
+			postConversation: function endpointPostConversation(conversation) {
+				return $http.put(
+					Config.base.api + '/conversations',
+					conversation,
+					{headers: API.authHeaders()}
+				);
+			},
+			deleteConversation: function endpointPostConversation(conversation) {
+				var auth = Storage.get('auth');
+				conversation['@metadata'].action = 'DELETE';
+				return $http.put(
+					Config.base.api + '/conversations',
+					conversation,
+					{headers: API.authHeaders()}
+				);
+			},
 			authHeaders: function apiAuthHeaders(obj) {
 				var auth = Storage.get('auth');
-				return {'Authorization': 'Espresso ' + auth.key + ':1'};
+				var key;
+				if (angular.equals(auth, null)) {
+					key = Config.registrationKey;
+				}
+				else {
+					key = auth.apikey;
+				}
+				return {'Authorization': 'Espresso ' + key + ':1'};
 			},
 			populateMetadata: function populateMetadata(entity, object) {
 				object['@metadata'] = {
@@ -52,6 +75,12 @@ Application.service('API', [
 					links: []
 				};
 				return object;
+			},
+			getUser: function endpointGetUser(user) {
+				return $http.get(
+					Config.base.api + '/users?filter=username%3D"' + user + '"',
+					{headers: API.authHeaders()}
+				);
 			}
 		};
 		return API;

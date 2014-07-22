@@ -1,0 +1,391 @@
+[
+  {
+    "@metadata": {
+      "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport/1000",
+      "checksum": "A:5ec25b5d1425e58f"
+    },
+    "ident": 1000,
+    "ts": "2014-07-21T12:06:11.000+0000",
+    "name": "conversations-wajbj",
+    "url_name": "wajbj",
+    "comments": null,
+    "status": null,
+    "account_ident": 1000,
+    "authprovider_ident": 1001,
+    "Users": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Users/1001",
+          "checksum": "A:b8caaafaecee39f2"
+        },
+        "ident": 1001,
+        "ts": "2014-07-21T12:01:34.000+0000",
+        "name": "demo",
+        "fullname": "Demo Account with full access",
+        "email": null,
+        "status": "A",
+        "roles": "Full access",
+        "data": null,
+        "apikey_lifespan": null,
+        "password_hash": "3beK5bwM/jSw56yFlrEZkBkrFrCHoSiQYWN0bVhzfpwUgB2W+O1e02N6iT65chXXIYsnYTS2pl71Y15xzwJE5w==",
+        "password_salt": "tyMyx34lb1hCeeXU1jtHpuUq48bDiH2ZjQXzbjT3",
+        "project_ident": 1000
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Users/1002",
+          "checksum": "A:9a5800e5150ecfec"
+        },
+        "ident": 1002,
+        "ts": "2014-07-21T12:01:34.000+0000",
+        "name": "guest",
+        "fullname": "Guest Account with read-only access",
+        "email": null,
+        "status": "A",
+        "roles": "Read only",
+        "data": null,
+        "apikey_lifespan": null,
+        "password_hash": "L6oBdy9vjOZbwZzdMG4KA8Zd6VB5BbPpCsIgJ0xU9uDjAAf3LY8SGqNaa8YFgL5y7CsM8O41HWP84pCaQ56fnw==",
+        "password_salt": "V8l81YobQZdq2UJtAHdqcszISOrTI8QpZ9qU2p2z",
+        "project_ident": 1000
+      }
+    ],
+    "DbaseSchemas": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.DbaseSchemas/1000",
+          "checksum": "A:0a20adf814874a16"
+        },
+        "ident": 1000,
+        "ts": "2014-07-21T12:01:34.000+0000",
+        "conn_type": null,
+        "name": "Database: conversations - root",
+        "comments": "Created using Connect Wizard",
+        "url": "jdbc:mysql://localhost:3306/conversations",
+        "catalog_name": "conversations",
+        "schema_name": null,
+        "user_name": "root",
+        "password": null,
+        "salt": "MdX00Mk5f4Ek6DmJizwOl26FdweG0Kiq5ros69Nu",
+        "port_num": null,
+        "read_only": null,
+        "schema_editable": null,
+        "active": true,
+        "status": null,
+        "project_ident": 1000,
+        "dbasetype_ident": 1,
+        "TableInfos": [
+        ]
+      }
+    ],
+    "ApiVersions": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ApiVersions/1000",
+          "checksum": "A:125b80fdca3175aa"
+        },
+        "ident": 1000,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "name": "v1",
+        "comments": null,
+        "project_ident": 1000,
+        "Resources": [
+        ]
+      }
+    ],
+    "ProjectOptions": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1000",
+          "checksum": "A:c6e116563778ca87"
+        },
+        "ident": 1000,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "false",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 1
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1001",
+          "checksum": "A:eb560cacfde17a8b"
+        },
+        "ident": 1001,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "http://www.espressologic.com/model/",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 2
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1002",
+          "checksum": "A:636fdbd8d9afed7c"
+        },
+        "ident": 1002,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "false",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 3
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1003",
+          "checksum": "A:99eebdeeea620575"
+        },
+        "ident": 1003,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "@metadata",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 4
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1004",
+          "checksum": "A:4b3f291c3ef26f3a"
+        },
+        "ident": 1004,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "2000",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 5
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1005",
+          "checksum": "A:e348576d26e3e8e6"
+        },
+        "ident": 1005,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "2000",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 6
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1006",
+          "checksum": "A:ca5204d5921be0e4"
+        },
+        "ident": 1006,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "20",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 7
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1007",
+          "checksum": "A:a8b445bd1ad52e35"
+        },
+        "ident": 1007,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "5000",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 8
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1008",
+          "checksum": "A:90cd85a3a38bfa7e"
+        },
+        "ident": 1008,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "20",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 9
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1009",
+          "checksum": "A:1fa81795a880a1ed"
+        },
+        "ident": 1009,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "100",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 10
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectOptions/1010",
+          "checksum": "A:d650b9a61124546a"
+        },
+        "ident": 1010,
+        "ts": "2014-07-21T12:01:33.000+0000",
+        "option_value": "2000",
+        "project_ident": 1000,
+        "projectoptiontype_ident": 11
+      }
+    ],
+    "ProjectLibraries": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ProjectLibraries/1007",
+          "checksum": "A:aa7cf9216173363a"
+        },
+        "ident": 1007,
+        "ts": "2014-07-21T15:06:42.000+0000",
+        "logic_library_ident": 1007,
+        "project_ident": 1000
+      }
+    ],
+    "Rules": [
+    ],
+    "ApiKeys": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.ApiKeys/1002",
+          "checksum": "A:345631aa0e92e649"
+        },
+        "ident": 1002,
+        "ts": "2014-07-21T12:01:34.000+0000",
+        "name": "Admin key",
+        "description": null,
+        "apikey": "RUfi7jfwVJ9wVGal745j",
+        "status": "A",
+        "default_access": null,
+        "expiration": null,
+        "logging": "*=FINE",
+        "user_identifier": null,
+        "data": null,
+        "project_ident": 1000
+      }
+    ],
+    "EventHandlers": [
+    ],
+    "Handlers": [
+    ],
+    "Roles": [
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles/1000",
+          "checksum": "A:16f209e0a1e4c942"
+        },
+        "ident": 1000,
+        "ts": "2014-07-21T12:01:32.000+0000",
+        "name": "Full access",
+        "description": "Full access to everything in this project",
+        "default_permission": "A",
+        "default_apivisibility": "TVPRM",
+        "project_ident": 1000,
+        "ApiKeyRoles": [
+          {
+            "@metadata": {
+              "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/1002",
+              "checksum": "A:7a9ab92976f98bd4"
+            },
+            "ident": 1002,
+            "ts": "2014-07-21T12:01:32.000+0000",
+            "apikey_ident": 1002,
+            "role_ident": 1000
+          }
+        ],
+        "PermissionData": [
+        ],
+        "TablePermissions": [
+        ]
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles/1001",
+          "checksum": "A:061aae6c82abd220"
+        },
+        "ident": 1001,
+        "ts": "2014-07-21T12:01:32.000+0000",
+        "name": "Read only",
+        "description": "Read-only access to everything in this project",
+        "default_permission": "R",
+        "default_apivisibility": "TVPRM",
+        "project_ident": 1000,
+        "ApiKeyRoles": [
+        ],
+        "PermissionData": [
+        ],
+        "TablePermissions": [
+        ]
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles/1002",
+          "checksum": "A:158c3a6d3cb82996"
+        },
+        "ident": 1002,
+        "ts": "2014-07-21T16:48:19.000+0000",
+        "name": "unregistered",
+        "description": null,
+        "default_permission": "N",
+        "default_apivisibility": "",
+        "project_ident": 1000,
+        "ApiKeyRoles": [
+        ],
+        "PermissionData": [
+        ],
+        "TablePermissions": [
+          {
+            "@metadata": {
+              "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles.TablePermissions/1000",
+              "checksum": "A:4eb3a8431cda177a"
+            },
+            "ident": 1000,
+            "ts": "2014-07-21T16:55:09.000+0000",
+            "name": "Auth",
+            "description": null,
+            "table_name": "users",
+            "column_names": null,
+            "predicate": null,
+            "access_type": "R",
+            "role_ident": 1002
+          }
+        ]
+      },
+      {
+        "@metadata": {
+          "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles/1003",
+          "checksum": "A:d387478647668231"
+        },
+        "ident": 1003,
+        "ts": "2014-07-22T09:02:15.000+0000",
+        "name": "user",
+        "description": null,
+        "default_permission": "N",
+        "default_apivisibility": "VRPM",
+        "project_ident": 1000,
+        "ApiKeyRoles": [
+        ],
+        "PermissionData": [
+        ],
+        "TablePermissions": [
+          {
+            "@metadata": {
+              "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles.TablePermissions/1002",
+              "checksum": "A:5f51793b08a79d9c"
+            },
+            "ident": 1002,
+            "ts": "2014-07-22T09:10:17.000+0000",
+            "name": "likes",
+            "description": null,
+            "table_name": "likes",
+            "column_names": null,
+            "predicate": "creator='@{username}'",
+            "access_type": "A",
+            "role_ident": 1003
+          },
+          {
+            "@metadata": {
+              "href": "http://localhost:8080/KahunaService/rest/abl/admin/v2/ProjectExport.Roles.TablePermissions/1003",
+              "checksum": "A:3351a9db34bad9ce"
+            },
+            "ident": 1003,
+            "ts": "2014-07-22T09:13:14.000+0000",
+            "name": "access to current user",
+            "description": null,
+            "table_name": "users",
+            "column_names": null,
+            "predicate": "username='@{username}'",
+            "access_type": "A",
+            "role_ident": 1003
+          }
+        ]
+      }
+    ]
+  }
+]

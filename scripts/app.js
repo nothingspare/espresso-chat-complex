@@ -8,10 +8,11 @@ Application.run([
 				//we've already logged in, so ...
 				
 				//redirect if the API key has expired
-				Auth.sessionValid();
+				var log = Auth.sessionValid();
 			}
 			else {
 				Auth.forceLogin();
+				$rootScope.$broadcast('UserLoggedOut');
 			}
 		});
 	}
@@ -21,5 +22,6 @@ Application.constant('Config', {
 	base: {
 		app: 'http://localhost/mdh/essential',
 		api: 'http://localhost:8080/KahunaService/rest/el-local/rwjoj/v1'
-	}
+	},
+	registrationKey: 'UbhlJdDVEja8p68NeEER'
 });

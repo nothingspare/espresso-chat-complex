@@ -2,12 +2,20 @@
 	<div class="col-md-6">
 		<h2>Conversations</h2>
 		<table class="table table-bordered table-striped">
-			<thead><td>Created</td><td>Title</td><td>Creator</td></thead>
+			<thead><td>Created</td><td>Title</td><td>Creator</td><td>Comments</td><td>Open</td><td>Delete</td></thead>
 			<tbody>
 				<tr class="cursor-pointer" ng-click="conversations.activate(conversation);" ng-repeat="conversation in conversationsList">
 					<td>{{conversation.time | date:'MM/dd/yy hh:mm a'}}</td>
 					<td>{{conversation.title}}</td>
-					<td>{{conversation.creator}}</td>
+					<td ng-mouseover="users.getInfo($event, conversation);">{{conversation.creator}}</td>
+					<td>{{conversation.comments}}</td>
+					<td class="center table-button" ng-click="conversations.toggleStatus(conversation);">
+						<i class="fa fa-lock" ng-hide="conversation.open"></i>
+						<i class="fa fa-unlock" ng-hide="!conversation.open"></i>
+					</td>
+					<td class="center table-button" ng-click="conversations.confirmDelete(conversation);">
+						<i class="fa fa-times"></i>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -19,10 +27,10 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h2>Dialog<span ng-if="activeConversation">: {{activeConversation.title}}</span></h2>
+		<h2>Dialogue<span ng-if="activeConversation">: {{activeConversation.title}}</span></h2>
 		<div class="" ng-if="activeConversation">
-			<p ng-repeat="dialog in dialogList">
-				<span class="small">{{dialog.time | date:'MM/dd/yy hh:mm a'}}</span> | <span class="text-primary">{{dialog.creator}}</span>: <span>{{dialog.message}}</span>
+			<p ng-repeat="dialogue in dialogueList">
+				<i class="fa fa-hand-o-left" ng-click="chat.like(dialogue);"></i> <span class="small"> ({{dialogue.likes}}) | {{dialogue.time | date:'MM/dd/yy hh:mm a'}}</span> | <span class="text-primary">{{dialogue.creator}}</span>: <span>{{dialogue.message}}</span>
 			</p>
 			<form ng-submit="chat.add();">
 				<input class="form-control" placeholder="Message" type="text" ng-model="message.message"/>

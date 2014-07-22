@@ -15,52 +15,105 @@ Application.controller('IndexController', [
 					id: '',
 					creator: auth.username,
 					open: true,
+					deletable: true,
+					comments: 0,
 					time: moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS')+'Z'
 				};
 				
 				API.populateMetadata('conversations', $scope.conversation);
 				angular.extend($scope.conversation, conversation); 
-				API.putConversation($scope.conversation).success(function () {
-					$scope.conversations.refresh();
-					$scope.conversation.title = '';
-				});
+				API.putConversation($scope.conversation).success($scope.conversations.reset);
 			},
 			refresh: function () {
 				API.getConversations().success(function (data) {
 					$scope.conversationsList = data;
 				});
 			},
+			reset: function () {
+				$scope.conversations.refresh();
+				$scope.conversation.title = '';
+			},
 			activate: function (conversation) {
-				$scope.refreshDialog = function () {
+				$scope.refreshDialogue = function () {
 					API.getMessages(conversation.id).success(function (data) {
-						$scope.dialogList = data;
+						$scope.dialogueList = data;
 						$scope.activeConversation = conversation;
 					});
 				}
 				setInterval(function () {
-					$scope.$apply($scope.refreshDialog);
+					$scope.$apply($scope.refreshDialogue);
 				}, 3000);
-				$scope.refreshDialog();
+				$scope.refreshDialogue();
+			},
+			toggleStatus: function (conversation) {
+				conversation.open = !conversation.open;
+				API.postConversation(conversation).success($scope.conversations.reset);
+				console.log('toggle status', conversation);
+			},
+			confirmDelete: function (conversation) {
+				var execute = confirm('Are you sure you want to delete ' + conversation.title);
+				if (execute) {
+					API.deleteConversation(conversation).success($scope.conversations.reset);
+				}
+			}
+		};
+		
+		$scope.users = {
+			getInfo: function ($event, conversation) {
+				var $element = angular.element($event.target);
+				API.getUser(conversation.creator).success(function (data) {
+					$element.data('powertip', data[0].comment_count + ' <i class="fa fa-comment-o"></i> ' + data[0].likes_count + ' <i class="fa fa-hand-o-left"></i>');
+					$element.powerTip({
+						placement: 's',
+						smartPlacement: true
+					});
+					$element.powerTip('show');
+				});
 			}
 		};
 		
 		//chat interfaces
 		$scope.chat = {
-			add: function () {
+			add: function (parent_id) {
+				if (!parent_id) {
+					parent_id = 0;
+				}
 				var auth = Storage.get('auth');
 				var message = {
 					id: '',
+					parent_id: parent_id,
 					conversation_id: $scope.activeConversation.id,
 					time: moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS')+'Z',
-					creator: auth.username
+					creator: auth.username,
+					upvote: 0
 				};
 				
 				API.populateMetadata('messages', $scope.message);
 				angular.extend($scope.message, message); 
-				API.putMessage($scope.message).success(function (data) {
-					$scope.conversations.activate($scope.activeConversation, true);
-					$scope.message.message = '';
-				});
+				API.putMessage($scope.message)
+					.success(function (data) {
+						$scope.conversations.refresh();
+						$scope.conversations.activate($scope.activeConversation, true);
+						$scope.message.message = '';
+					})
+					['error']($scope.chat.fail);
+			},
+			fail: function (data) {
+				console.log('chat failed', data);
+				if (data.errorCode === 50052) {
+					alert(data.errorMessage);
+				}
+				else {
+					//server error, possibly no message entered
+				}
+			},
+			like: function (dialogue) {
+				dialogue.likes++;
+				API.putMessage(dialogue)
+					.success(function (data) {
+						$scope.conversations.refresh();
+						$scope.conversations.activate($scope.activeConversation, true);
+					})
 			}
 		};
 		

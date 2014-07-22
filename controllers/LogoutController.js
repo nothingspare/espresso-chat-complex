@@ -1,8 +1,9 @@
 'use strict';
 Application.controller('LogoutController', [
-	'$location', 'Auth',
-	function ($location, Auth) {
+	'$rootScope', 'Auth',
+	function ($rootScope, Auth) {
 		Auth.logout();
 		Auth.forceLogin();
+		$rootScope.$broadcast('UserLoggedOut');
 	}
 ]);

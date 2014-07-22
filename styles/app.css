@@ -1,3 +1,11 @@
 .login-form{margin:0 auto; max-width: 300px;}
 input{margin:5px 0;}
 .cursor-pointer{cursor:pointer;}
+.float-left{float:left;}
+.float-right{float:right;}
+.center{text-align:center; margin:0 auto;}
+.app-content .table .table-button:hover{background: rgba(0,0,0,.5); color:#fff;}
+
+.navigation{margin:15px 0;}
+.horizontal-list{list-style:none;}
+.horizontal-list li{display:inline;}

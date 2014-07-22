@@ -1,6 +1,6 @@
 Application.service('Auth', [
-	'Storage', '$location', 'API',
-	function (Storage, $location, API) {
+	'Storage', '$location', 'API', '$rootScope', '$q',
+	function (Storage, $location, API, $rootScope, $q) {
 		var Auth = {
 			sessionExists: function authSessionExists() {
 				var auth = Storage.get('auth');
@@ -10,14 +10,19 @@ Application.service('Auth', [
 				return false;
 			},
 			login: function authLogin(credentials) {
+				var deferred = $q.defer();
 				//send the login info to the '@authenticate' endpoint
-				return API.authenticate(credentials).success(function (data) {
-					var auth = {
-						username: credentials.username,
-						key: data.apikey
-					};
-					Storage.put('auth', auth);
+				API.authenticate(credentials).success(function (data) {
+					if (angular.equals(data, [])) {
+						deferred.reject('No user with those credentials found, please try again');
+					}
+					else {
+						var auth = data[0];
+						Storage.put('auth', auth);
+						deferred.resolve();
+					}
 				});
+				return deferred.promise;
 			},
 			logout: function authLogout() {
 				Storage.remove('auth');
@@ -26,7 +31,14 @@ Application.service('Auth', [
 				$location.path('/login');
 			},
 			sessionValid: function () {
-				API.valid()['error'](function () {
+				var validKey = API.valid();
+				validKey.success(function (data) {
+					var auth = Storage.get('auth'); //if the user just logged out, auth has been deleted after the request
+					if (auth) {
+						$rootScope.$broadcast('UserLoggedIn');
+					}
+				});
+				validKey['error'](function () {
 					if ($location.path() === '/login') {return;}
 					Auth.forceLogin();
 				});

@@ -14,19 +14,24 @@
         <link rel="stylesheet" href="styles/bootstrap-theme.min.css" />
         <link rel="stylesheet" href="styles/font-awesome.min.css" />
         <link rel="stylesheet" href="styles/app.css" />
+        <link rel="stylesheet" href="styles/jquery.powertip.min.css" />
 		
         <script src="scripts/moment.min.js"></script>
         <script src="scripts/jquery-2.1.1.min.js"></script>
+        <script src="scripts/jquery.powertip.min.js"></script>
         <script src="scripts/bootstrap.min.js"></script>
         <script src="scripts/angular.min.js"></script>
         <script src="scripts/angular-route.min.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/routes.js"></script>
 		
+        <script src="directives/ChatMenuDirective.js"></script>
+		
         <script src="services/Storage.js"></script>
         <script src="services/API.js"></script>
         <script src="services/Auth.js"></script>
 		
+        <script src="controllers/NavigationController.js"></script>
         <script src="controllers/IndexController.js"></script>
         <script src="controllers/LoginController.js"></script>
         <script src="controllers/LogoutController.js"></script>
@@ -35,8 +40,15 @@
 		<div class="container" ng-app="Application">
 		
 			<div class="row app-header">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<h2>Espresso Chat</h2>
+				</div>
+				<div class="navigation col-md-6">
+					<ul class="horizontal-list float-right" chat-menu>
+						<li><a href="#/" class="btn btn-primary"><i class="fa fa-home"></i></a></li>
+						<li ng-hide="isAuthenticated"><a href="#/login" class="btn btn-primary"><i class="fa fa-user"></i> Login</a></li>
+						<li ng-hide="!isAuthenticated"><a href="#/logout" class="btn btn-primary"><i class="fa fa-user"></i> Logout</a></li>
+					</ul>
 				</div>
 			</div>
 			
