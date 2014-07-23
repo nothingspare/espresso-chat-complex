@@ -20,7 +20,6 @@ Application.run([
 
 Application.constant('Config', {
 	base: {
-		app: 'http://localhost/mdh/espresso-chat-complex',
-		api: 'http://localhost:8080/KahunaService/rest/el-local/cwskj/v1'
+		api: 'http://localhost:8080/KahunaService/rest/el-local/wajbj/v1'
 	}
 });
