@@ -20,8 +20,7 @@ Application.run([
 
 Application.constant('Config', {
 	base: {
-		app: 'http://localhost/mdh/essential',
-		api: 'http://localhost:8080/KahunaService/rest/el-local/rwjoj/v1'
-	},
-	registrationKey: 'UbhlJdDVEja8p68NeEER'
+		app: 'http://localhost/mdh/espresso-chat-complex',
+		api: 'http://localhost:8080/KahunaService/rest/el-local/cwskj/v1'
+	}
 });

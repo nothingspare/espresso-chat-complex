@@ -8,75 +8,45 @@
 function AppAuthenticationProviderCreate() {
 
 	// Default values for the configuration parameters
-	var username = '';
+	var dbUrl = '';
+	var database = '';
+	var user = '';
+	var password = '';
 
 	// This gets called with the user-specified values for the parameters described by getConfigInfo
 	function configure(myConfig) {
-		username = myConfig.username || 'Username';
+		dbUrl = myConfig.dbUrl || '';
+		database = myConfig.database || '';
+		user = myConfig.user || '';
+		password = myConfig.password || '';
 	}
-	/*
-	var restCaller = new com.kahuna.logic.lib.rest.RestCaller(this);
-	var response = restCaller.get(
-		"http://localhost:8080/KahunaService/rest/el-local/wajbj/v1/", 
-		{},//{filter: 'email=\'' + sanitizedEmail + '\''}, 
-		{headers:{Authorization: "Espresso " + RUfi7jfwVJ9wVGal745j + ":1"}}
-	);
-	var user = JSON.parse(response);
-	*/
-	
 	
 	// This is the method called to do the authentication
 	// The payload is an object with properties as defined by the getLoginInfo() call
 	function authenticate(payload) {
-		if (payload.unregistered) {
-				var restCaller = new com.kahuna.logic.lib.rest.RestCaller(this);
-				var response = restCaller.get(
-					"http://localhost:8080/KahunaService/rest/el-local/wajbj/v1/users", 
-					{},//{filter: 'email=\'' + sanitizedEmail + '\''}, 
-					{headers:{Authorization: "Espresso " + /*payload.apikey*/ 'RUfi7jfwVJ9wVGal745j' + ":1"}}
-				);
-			return {
-				errorMessage: null,
-				roleNames: ['unregistered'],
-				userInfo: response,
-			};
-		}
-		else {
-			if (payload.username && payload.apikey && payload.password) {
+		var scriptRunner = new com.kahuna.logic.lib.sql.ScriptRunner(dbUrl + '/' + database, database, user, password);
+		var result = scriptRunner.query('SELECT * FROM users WHERE username = "' + payload.username + '" AND password = md5("' + payload.password + '")');
+		if (result) {
+			try {
+				var json = JSON.parse(result);
 				return {
 					errorMessage: null,
-					userData: {username: payload.username},
 					roleNames: ['user'],
+					userData: {
+						username: json[0].username
+					},
+					userInfo: {
+						id: json[0].id,
+						username: json[0].username,
+						email: json[0].email
+					}
 				};
-				//*
-				//*/
+			} catch (e) {
+				return {
+					errorMessage: 'No user found.'
+				};
 			}
 		}
-		return;
-		if (secretWord !== payload.password) {
-			// Authentication fails
-			return {
-				errorMessage: 'You must enter the value "' + secretWord + '" (without the quotes)'
-			};
-		}
-
-		// Success: the password was indeed the secret word
-		return {
-			errorMessage: null, // must be null for 'success'
-			roleNames: ['Full access'], // Must correspond to actual roles in your project
-			// Optional: if users can be identified by a string, it's useful to include it here
-			userIdentifier: payload.username,
-			// userData properties will be added to the API key for use in security
-			userData:  { employeeId: 'A123456', region: 'US-west' },
-			// userInfo properties will be returned to the caller along with the API key
-			userInfo: { hairColor: "blue", height: "tallish"},
-			// How long the resulting API key should be valid for
-			keyLifetimeSeconds: 3600,
-			// Optionally, we can let the system know when the user's last login was
-			lastLogin: new Date(1999, 11, 31),  // Caution: month 0 = January, 1 - Feb etc
-			// Optionally, we can also let the system know what the last login's IP address was
-			lastLoginIP: "12.34.56.78"
-		};
 	}
 
 	// This gets called when a client needs to know what information is required to authenticate.
@@ -118,8 +88,10 @@ function AppAuthenticationProviderCreate() {
 			// The current values for the configuration parameters described below.
 			// This allows the Logic Designer to show these values as already set by default.
 			current: {
-				username: '',
-				password: ''
+				user: user,
+				password: password,
+				dbUrl: dbUrl,
+				database: database
 			},
 
 			// The specification for our configuration parameters.
@@ -127,19 +99,33 @@ function AppAuthenticationProviderCreate() {
 			// a secret word you must know to get in.
 			fields: [
 				{
-					name: 'helloPhrase',
-					display: 'Hello Phrase',
-					description: 'The phrase to display to the user',
-					length: 40,
-					helpURL: 'http://www.acme.com/help1'
+					name: 'dbUrl',
+					display: 'Database URL',
+					description: 'Database URL',
+					length: 64,
+					helpURL: ''
 				},
 				{
-					name: 'secretWord',
-					display: 'Secret Word',
-					description: 'The word that the user must know',
-					length: 40,
-					helpURL: 'http://www.acme.com/help2'
-				}
+					name: 'database',
+					display: 'Database Name',
+					description: 'Database Name',
+					length: 64,
+					helpURL: ''
+				},
+				{
+					name: 'user',
+					display: 'Database User',
+					description: 'Database User',
+					length: 64,
+					helpURL: ''
+				},
+				{
+					name: 'password',
+					display: 'User Password',
+					description: 'User Password',
+					length: 64,
+					helpURL: ''
+				},
 			]
 		};
 	}
