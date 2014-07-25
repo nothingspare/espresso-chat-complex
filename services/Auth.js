@@ -13,11 +13,12 @@ Application.service('Auth', [
 				var deferred = $q.defer();
 				//send the login info to the '@authenticate' endpoint
 				API.authenticate(credentials).success(function (data) {
-					if (angular.equals(data, [])) {
+					console.log(data);
+					if (angular.equals(data, {})) {
 						deferred.reject('No user with those credentials found, please try again');
 					}
 					else {
-						var auth = data[0];
+						var auth = data;
 						Storage.put('auth', auth);
 						deferred.resolve();
 					}

@@ -13,6 +13,9 @@ Application.directive('chatMenu', [
 				$scope.$on('UserLoggedOut', function () {
 					$scope.isAuthenticated = false;
 				});
+				$scope.register = function () {
+					$rootScope.$broadcast('toggleRegister');
+				};
 			}]
 		};
 		return ChatMenu;

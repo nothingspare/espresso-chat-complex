@@ -24,6 +24,12 @@ function AppAuthenticationProviderCreate() {
 	// This is the method called to do the authentication
 	// The payload is an object with properties as defined by the getLoginInfo() call
 	function authenticate(payload) {
+		if (payload.unregistered) {
+			return {
+				errorMessage: null,
+				roleNames: ['unregistered']
+			};
+		}
 		var scriptRunner = new com.kahuna.logic.lib.sql.ScriptRunner(dbUrl + '/' + database, database, user, password);
 		var result = scriptRunner.query('SELECT * FROM users WHERE username = "' + payload.username + '" AND password = md5("' + payload.password + '")');
 		if (result) {
@@ -53,12 +59,13 @@ function AppAuthenticationProviderCreate() {
 	// The information returned by this will be provided to the client, who can then make a call
 	// with values for the parameters declared here.
 	function getLoginInfo() {
+		//@login_info
 		return {
 			fields: [
 				{
 					name: 'password',
-					display: helloPhrase,
-					description: 'Enter "' + secretWord + '" without quotes',
+					display: password,
+					description: 'Enter "' + password + '" without quotes',
 					type: 'text',
 					length: 30
 				}

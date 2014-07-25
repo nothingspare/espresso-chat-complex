@@ -1,12 +1,12 @@
 Application.service('API', [
-	'Config', '$http', 'Storage',
-	function (Config, $http, Storage) {
+	'Config', '$http', 'Storage', '$q', '$rootScope',
+	function (Config, $http, Storage, $q, $rootScope) {
 		//endpoints wrapper
 		var API = {
 			authenticate: function endpointAuthentication(credentials) {
-				return $http.get(
-					Config.base.api + '/auth?arg_username=' + credentials.username + '&arg_password=' + credentials.password,
-					{headers: API.authHeaders()}
+				return $http.post(
+					Config.base.api + '/@authentication',
+					credentials
 				);
 			},
 			valid: function endpointApp() {
@@ -21,10 +21,18 @@ Application.service('API', [
 					{headers: API.authHeaders()}
 				);
 			},
-			putMessage: function endpointPutMessage(message) {
-				return $http.put(
+			putMessage: function endpointPostMessage(message) {
+				return $http.post(
 					Config.base.api + '/messages',
 					message,
+					{headers: API.authHeaders()}
+				);
+			},
+			postLike: function endpointPostLike(like) {
+				console.log(like);
+				return $http.post(
+					Config.base.api + '/likes',
+					like,
 					{headers: API.authHeaders()}
 				);
 			},
@@ -61,7 +69,7 @@ Application.service('API', [
 				var auth = Storage.get('auth');
 				var key;
 				if (angular.equals(auth, null)) {
-					key = Config.registrationKey;
+					return {};
 				}
 				else {
 					key = auth.apikey;
@@ -76,12 +84,34 @@ Application.service('API', [
 				};
 				return object;
 			},
-			getUser: function endpointGetUser(user) {
+			getLikability: function endpointGetLikability(user) {
 				return $http.get(
-					Config.base.api + '/users?filter=username%3D"' + user + '"',
+					Config.base.api + '/likability?arg_username=' + user,
 					{headers: API.authHeaders()}
 				);
-			}
+			},
+			postUser: function endpointPostUser(user) {
+				var deferred = $q.defer();
+				API.authenticate({unregistered:true})
+					.success(function (data) {
+						console.log(data);
+						var $promise = $http.post(
+							Config.base.api + '/users',
+							user,
+							{headers: {Authorization:'Espresso ' + data.apikey +':1'}}
+						).success(function () {
+							$rootScope.$broadcast('AuthAuthenticate', {
+								username: user.username,
+								password: user.password
+							});
+						});
+						deferred.resolve($promise);
+					})
+					['error'](function () {
+						deferred.reject('No user created');
+					});
+				return deferred.promise;
+			},
 		};
 		return API;
 	}

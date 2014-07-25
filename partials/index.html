@@ -30,7 +30,7 @@
 		<h2>Dialogue<span ng-if="activeConversation">: {{activeConversation.title}}</span></h2>
 		<div class="" ng-if="activeConversation">
 			<p ng-repeat="dialogue in dialogueList">
-				<i class="fa fa-hand-o-left" ng-click="chat.like(dialogue);"></i> <span class="small"> ({{dialogue.likes}}) | {{dialogue.time | date:'MM/dd/yy hh:mm a'}}</span> | <span class="text-primary">{{dialogue.creator}}</span>: <span>{{dialogue.message}}</span>
+				<i class="fa fa-thumbs-up" ng-click="chat.like(dialogue);"></i> <span class="small"> ({{dialogue.likes}}) | {{dialogue.time | date:'MM/dd/yy hh:mm a'}}</span> | <span class="text-primary">{{dialogue.creator}}</span>: <span>{{dialogue.message}}</span>
 			</p>
 			<form ng-submit="chat.add();">
 				<input class="form-control" placeholder="Message" type="text" ng-model="message.message"/>

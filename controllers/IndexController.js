@@ -47,7 +47,11 @@ Application.controller('IndexController', [
 			},
 			toggleStatus: function (conversation) {
 				conversation.open = !conversation.open;
-				API.postConversation(conversation).success($scope.conversations.reset);
+				API.postConversation(conversation)
+					.success($scope.conversations.reset)
+					['error'](function () {
+						conversation.open = !conversation.open;
+					});
 				console.log('toggle status', conversation);
 			},
 			confirmDelete: function (conversation) {
@@ -61,7 +65,7 @@ Application.controller('IndexController', [
 		$scope.users = {
 			getInfo: function ($event, conversation) {
 				var $element = angular.element($event.target);
-				API.getUser(conversation.creator).success(function (data) {
+				API.getLikability(conversation.creator).success(function (data) {
 					$element.data('powertip', data[0].comment_count + ' <i class="fa fa-comment-o"></i> ' + data[0].likes_count + ' <i class="fa fa-hand-o-left"></i>');
 					$element.powerTip({
 						placement: 's',
@@ -80,12 +84,11 @@ Application.controller('IndexController', [
 				}
 				var auth = Storage.get('auth');
 				var message = {
-					id: '',
 					parent_id: parent_id,
 					conversation_id: $scope.activeConversation.id,
 					time: moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS')+'Z',
 					creator: auth.username,
-					upvote: 0
+					likes: 0
 				};
 				
 				API.populateMetadata('messages', $scope.message);
@@ -108,8 +111,14 @@ Application.controller('IndexController', [
 				}
 			},
 			like: function (dialogue) {
-				dialogue.likes++;
-				API.putMessage(dialogue)
+				var auth = Storage.get('auth');
+				var like = {
+					message_id: dialogue.id,
+					username: auth.username,
+					liked_user: dialogue.creator
+				};
+				console.log(like);
+				API.postLike(like)
 					.success(function (data) {
 						$scope.conversations.refresh();
 						$scope.conversations.activate($scope.activeConversation, true);

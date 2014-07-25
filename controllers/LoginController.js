@@ -1,7 +1,7 @@
 'use strict';
 Application.controller('LoginController', [
-	'$rootScope', 'Storage', '$scope', 'Auth', '$timeout', '$location',
-	function ($rootScope, Storage, $scope, Auth, $timeout, $location) {
+	'$rootScope', 'Storage', '$scope', 'Auth', '$timeout', '$location', 'API',
+	function ($rootScope, Storage, $scope, Auth, $timeout, $location, API) {
 		//init form parameters
 		$scope.data = {
 			username: '',
@@ -28,9 +28,24 @@ Application.controller('LoginController', [
 			},
 			success: function (data) {
 				$location.path('/');
+			},
+			register: function () {
+				console.log('register', $scope.data);
+				API.postUser($scope.data).then(function (promise) {
+					console.log(promise);
+				});
 			}
 		};
 		
+		$scope.registrationMode = false;
+		$scope.$on('toggleRegister', function () {
+			$scope.registrationMode = !$scope.registrationMode;
+		});
+
+		$scope.$on('AuthAuthenticate', function (event, data) {
+			$scope.data = data;
+			$scope.form.submit();
+		});
 		//redirect if already logged in
 	}
 ]);
